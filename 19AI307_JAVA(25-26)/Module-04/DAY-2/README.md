@@ -1,15 +1,62 @@
 # Ex.No:4(B)  IMPLEMENT SOLID PRINCIPLES IN JAVA PROGRAM 
 
 ## QUESTION:
+At an international airport, only one Radar Control Tower exists. This tower is responsible for handling all flight communications regardless of how many flights are coming in. Each incoming flight must contact this tower to register its approach.
 
+To ensure safety and consistency, all flights must communicate with the same instance of the tower. If multiple towers are created, it may lead to inconsistent instructions — a huge risk in aviation.
+
+Your task is to simulate this system using the Singleton pattern.
+
+Key Hint (Hidden in Story): Only one control tower object should exist.
+
+Every flight contacting it should register its name.
+
+You should log the order of flights that contacted the tower.
+
+Input Format:
+First line: Integer n – number of incoming flights
+
+Next n lines: Each line contains the flight name.
+
+Output Format:
+For each flight, print:
+
+[FlightName] registered with Radar Control Tower. Total Flights: [count]
 
 ## AIM:
-
+To simulate an airport Radar Control Tower system using the Singleton design pattern, ensuring that all incoming flights communicate with the same single instance of the control tower.
 
 ## ALGORITHM :
 1.	Start the program.
 2.	Import the necessary package 'java.util'
-3.	
+3.	Create a RadarControlTower class.
+4.	Declare a private static instance variable to hold the single tower object.
+5.	Make the constructor private to prevent external instantiation.
+   
+ 6.	Implement the getInstance() method:
+    If the instance is null, create a new RadarControlTower.
+    Otherwise, return the existing instance.
+   	
+ 7.Maintain a flightCount variable to track how many flights have registered.
+ 8.Implement registerFlight(String flightName):
+   Increment flightCount
+   Return the updated count.
+
+ 9.In the main method:
+   Read the number of incoming flights n.
+   For each flight:
+   Read the flight name.
+   Get the single instance of the Radar Control Tower.
+   Register the flight.
+
+   Print:
+   [FlightName] registered with Radar Control Tower. Total Flights: [count]
+
+10.End the program.
+
+
+
+
 
 
 
@@ -19,14 +66,50 @@
  ```
 /*
 Program to implement a SOLID Principles in Java Program
-Developed by: 
-RegisterNumber:  
+Developed by: Jwalamukhi S
+RegisterNumber:  212223040079
 */
 ```
 
 ## SOURCE CODE:
 
+```
+import java.util.*;
 
+class RadarControlTower {
+    private static RadarControlTower instance;
+    private int flightCount = 0;
+
+    private RadarControlTower() {}
+
+    public static RadarControlTower getInstance() {
+        if (instance == null) {
+            instance = new RadarControlTower();
+        }
+        return instance;
+    }
+
+    public int registerFlight(String flightName) {
+        flightCount++;
+        return flightCount;
+    }
+}
+
+public class prog {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        sc.nextLine();  // consume newline
+
+        for (int i = 0; i < n; i++) {
+            String flight = sc.nextLine();
+            RadarControlTower tower = RadarControlTower.getInstance();
+            int total = tower.registerFlight(flight);
+            System.out.println(flight + " registered with Radar Control Tower. Total Flights: " + total);
+        }
+    }
+}
+```
 
 
 
@@ -34,6 +117,9 @@ RegisterNumber:
 
 ## OUTPUT:
 
+<img width="1191" height="326" alt="image" src="https://github.com/user-attachments/assets/d5e1b32d-20b7-441d-a7c5-4246dbf6dfd4" />
+
 
 
 ## RESULT:
+The program successfully demonstrates the Singleton pattern by ensuring that all flights use the same Radar Control Tower instance. It registers each flight in order and displays the current total number of flights handled by the tower.
