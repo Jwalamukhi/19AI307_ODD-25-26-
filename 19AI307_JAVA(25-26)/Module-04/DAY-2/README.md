@@ -38,6 +38,7 @@ To simulate an airport Radar Control Tower system using the Singleton design pat
     Otherwise, return the existing instance.
    	
  7.Maintain a flightCount variable to track how many flights have registered.
+ 
  8.Implement registerFlight(String flightName):
    Increment flightCount
    Return the updated count.
@@ -123,3 +124,4 @@ public class prog {
 
 ## RESULT:
 The program successfully demonstrates the Singleton pattern by ensuring that all flights use the same Radar Control Tower instance. It registers each flight in order and displays the current total number of flights handled by the tower.
+
