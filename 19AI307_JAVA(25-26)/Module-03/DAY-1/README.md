@@ -1,15 +1,55 @@
 # Ex.No:3(A) INHERITANCE AND AGGREGATION
 
 ## QUESTION:
+A jewelry store tracks gold rates for different types of customers. The base class is Customer with attributes like customerId, name, and purchaseWeight (in grams). There are two types of customers: RegularCustomer and PremiumCustomer. RegularCustomer gets a fixed discount of 2% on the gold rate per gram. PremiumCustomer gets a 5% discount plus a special cashback. The base gold rate per gram is input at runtime. For each customer, calculate the final price they pay:
 
+finalPrice = purchaseWeight * (goldRatePerGram - discount)
+
+For PremiumCustomer, additionally show cashback amount (which is 1% of the final price).
 
 ## AIM:
+To develop a Java program that calculates the final gold purchase amount for different customer types using inheritance.
+The program should apply:
 
+2% discount for RegularCustomer
+5% discount + 1% cashback for PremiumCustomer
+and compute the final payable amount based on purchase weight and gold rate per gram.
 
 ## ALGORITHM :
-1.	Start the program.
-2.	Import the necessary package 'java.util'
-3.	
+1.Create a base class Customer with attributes:
+customerId,
+name,
+purchaseWeight,
+goldRatePerGram
+
+2.Implement a constructor to initialize the above values.
+
+3.Create a method getDiscountRate() that returns 0 in the base class.
+
+4.Create a method calculateFinalPrice():
+Calculate discount amount,
+Subtract discount from gold rate,
+Multiply effective rate with purchase weight
+
+5.Create a display() method to print customer details.
+
+6.Create RegularCustomer class extending Customer:
+Override getDiscountRate() to return 2%,
+Override display() to show details
+
+7.Create PremiumCustomer class extending Customer:
+Override getDiscountRate() to return 5%,
+Add getCashback() returning 1% of final price,
+Override display() to show details including cashback
+
+8.In the main() method:
+Read user input (type, id, name, weight, gold rate),
+Based on type, create the appropriate customer object,
+Call display() to print output
+
+9.End the program.
+
+
 
 
 
@@ -19,13 +59,122 @@
  ```
 /*
 Program to implement a Inheritance and Aggregation using Java
-Developed by: 
-RegisterNumber:  
+Developed by: Jwalamukhi S
+RegisterNumber:  212223040079
 */
 ```
 
 ## SOURCE CODE:
+```
+import java.util.Scanner;
+import java.text.DecimalFormat;
 
+class Customer {
+    String customerId, name;
+    double purchaseWeight, goldRatePerGram;
+
+    Customer(String customerId, String name, double purchaseWeight, double goldRatePerGram) {
+        this.customerId = customerId;
+        this.name = name;
+        this.purchaseWeight = purchaseWeight;
+        this.goldRatePerGram = goldRatePerGram;
+    }
+
+    double getDiscountRate() {
+        return 0;
+    }
+
+    double calculateFinalPrice() {
+        double discountAmount = goldRatePerGram * getDiscountRate() / 100;
+        double effectiveRate = goldRatePerGram - discountAmount;
+        return purchaseWeight * effectiveRate;
+    }
+
+    void display() {
+        DecimalFormat df = new DecimalFormat("0.00");
+        System.out.println("Customer ID: " + customerId);
+        System.out.println("Name: " + name);
+        System.out.println("Customer Type: General");
+        System.out.println("Purchase Weight: " + purchaseWeight + " grams");
+        System.out.println("Gold Rate per Gram: " + goldRatePerGram);
+        System.out.println("Discount: " + getDiscountRate() + "%");
+        System.out.println("Final Price: " + df.format(calculateFinalPrice()));
+    }
+}
+
+class RegularCustomer extends Customer {
+    RegularCustomer(String customerId, String name, double purchaseWeight, double goldRatePerGram) {
+        super(customerId, name, purchaseWeight, goldRatePerGram);
+    }
+
+    @Override
+    double getDiscountRate() {
+        return 2.0;
+    }
+
+    @Override
+    void display() {
+        DecimalFormat df = new DecimalFormat("0.00");
+        System.out.println("Customer ID: " + customerId);
+        System.out.println("Name: " + name);
+        System.out.println("Customer Type: Regular");
+        System.out.println("Purchase Weight: " + purchaseWeight + " grams");
+        System.out.println("Gold Rate per Gram: " + goldRatePerGram);
+        System.out.println("Discount: " + (int)getDiscountRate() + "%");
+        System.out.println("Final Price: " + df.format(calculateFinalPrice()));
+    }
+}
+
+class PremiumCustomer extends Customer {
+    PremiumCustomer(String customerId, String name, double purchaseWeight, double goldRatePerGram) {
+        super(customerId, name, purchaseWeight, goldRatePerGram);
+    }
+
+    @Override
+    double getDiscountRate() {
+        return 5.0;
+    }
+
+    double getCashback() {
+        return calculateFinalPrice() * 0.01;
+    }
+
+    @Override
+    void display() {
+        DecimalFormat df = new DecimalFormat("0.00");
+        System.out.println("Customer ID: " + customerId);
+        System.out.println("Name: " + name);
+        System.out.println("Customer Type: Premium");
+        System.out.println("Purchase Weight: " + purchaseWeight + " grams");
+        System.out.println("Gold Rate per Gram: " + goldRatePerGram);
+        System.out.println("Discount: " + (int)getDiscountRate() + "%");
+        System.out.println("Final Price: " + df.format(calculateFinalPrice()));
+        System.out.println("Cashback: " + df.format(getCashback()));
+    }
+}
+
+public class JewelryStore {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String type = sc.nextLine().trim();
+        String customerId = sc.nextLine().trim();
+        String name = sc.nextLine().trim();
+        double purchaseWeight = sc.nextDouble();
+        double goldRatePerGram = sc.nextDouble();
+
+        Customer customer;
+        if (type.equalsIgnoreCase("Regular")) {
+            customer = new RegularCustomer(customerId, name, purchaseWeight, goldRatePerGram);
+        } else if (type.equalsIgnoreCase("Premium")) {
+            customer = new PremiumCustomer(customerId, name, purchaseWeight, goldRatePerGram);
+        } else {
+            customer = new Customer(customerId, name, purchaseWeight, goldRatePerGram);
+        }
+
+        customer.display();
+    }
+}
+```
 
 
 
@@ -35,5 +184,14 @@ RegisterNumber:
 ## OUTPUT:
 
 
+<img width="839" height="741" alt="image" src="https://github.com/user-attachments/assets/d42f5b11-0326-47f9-841e-35b60a771844" />
+
 
 ## RESULT:
+The program successfully computes the final gold purchase price for:
+
+General customers,
+Regular customers (with 2% discount),
+Premium customers (with 5% discount and 1% cashback).
+
+It displays complete details including customer type, discount applied, final price, and cashback for premium customers.
