@@ -19,6 +19,7 @@ Otherwise → Display "Access Denied"
    Else if num is between 100 and 999, display "Strong Code".
    Else, display "Access Denied".
    If no, display "Access Denied".
+  	
 5.End.
 
 
@@ -69,3 +70,4 @@ class prog{
 
 ## RESULT:
 The program has been executed successfully and the desired output has been obtained.
+
