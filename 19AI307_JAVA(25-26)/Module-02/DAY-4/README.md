@@ -14,11 +14,13 @@ To write a Java program that initializes object variables using a constructor an
 4.	Create a parameterized constructor to initialize these variables.
 5.	Override the toString() method to return the student details in a formatted string.
 6.	In the main() method:
+   
    :Read the name and age from the user.
 
    :Create a Student object using the constructor.
 
 7.Print the object, which automatically calls the overridden toString() method.
+
 8.End the program.
 
   
@@ -75,3 +77,4 @@ public class prog{
 
 ## RESULT:
 The program has been executed successfully and the desired output has been obtained.
+
