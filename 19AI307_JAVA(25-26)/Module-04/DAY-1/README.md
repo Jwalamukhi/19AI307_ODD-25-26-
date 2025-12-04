@@ -13,16 +13,16 @@ To write a Java program that demonstrates how a NullPointerException occurs when
 4.	Read an integer value input.
 5.	If the input is 0, assign null to the Integer object num; otherwise assign the input value.
 6.	Use a try block to call num.toString():
-7.	
+   
 If num is not null, print its string representation,
 
 If num is null, a NullPointerException will be thrown.
 
-8.Catch the NullPointerException and print "Null Integer".
+7.Catch the NullPointerException and print "Null Integer".
 
-9.Close the scanner.
+8.Close the scanner.
 
-10.End the program.
+9.End the program.
 
 
 
@@ -72,3 +72,4 @@ public class NullPointerIntegerExample {
 
 ## RESULT:
 The program successfully demonstrates how invoking a method on a null Integer object triggers a NullPointerException, and shows how the exception can be caught and handled gracefully by printing "Null Integer".
+
